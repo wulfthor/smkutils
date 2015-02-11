@@ -4,9 +4,11 @@ import re
 import os
 import sys
 
+
 fh1=open(sys.argv[1],'r')
 fhlog=open(sys.argv[2],'w')
 timediff=int(sys.argv[3])
+all=int(sys.argv[4])
 
 
 ##############################
@@ -56,8 +58,9 @@ for sline in searchlines:
       if diff >= timediff:
         warnDict[prevKey]=[diff,prevLine,sline]
 
-for key in resDict.iterkeys():
-  print key + " " + str(resDict[key])
+if all != 0:
+  for key in resDict.iterkeys():
+    print key + " " + str(resDict[key])
 
 for key in warnDict.iterkeys():
   print "WARN: " + key + " " + str(warnDict[key])
