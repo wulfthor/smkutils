@@ -50,7 +50,7 @@ fi
 if [ "$dayname" == "man" -a ! -e "$weeknuxeodumpfile" ]; then
         pg_dump -h $host -U nuxeo nuxeo -F t -f $weeknuxeodumpfile >> $log 2>&1
 
-else:
+else
         pg_dump -h $host -U nuxeo nuxeo -F t -f $nuxeodumpfile >> $log 2>&1
 fi
 dumpstatus=$?
