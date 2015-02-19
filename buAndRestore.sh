@@ -1,3 +1,4 @@
+#!/bin/bash
 
 
 #  pg_restore -c -i -U cspace -d "cspace" -v /tmp/backup.sql
