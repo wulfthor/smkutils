@@ -67,32 +67,22 @@ def main():
         if method == "searchu":
                 myurl=baseurl + "users/search.json?q=" + user + "&result_type=mixed&count=" + str(count)
         if method == "searcht":
-                #myurl=baseurl + "get/search/tweets.json?q=%23" + user
-                #myurl=baseurl + "get/search/tweets.json?q=&from=" + user + "&count=100"
-                #myurl=baseurl + "search/tweets.json?q=@noradio"
-                #myurl=baseurl + "search/tweets.json?q=wulfthor&result_type=mixed&count=4"
                 myurl=baseurl + "search/tweets.json?q=" + searchstring + "&lang=" + lang + "&count=" + str(count)
         if method == "timeline":
                 myurl=baseurl + "statuses/user_timeline.json?" + "screen_name=" + user + "&count=" + str(count)
 
         fh.write(myurl)
         r = requests.get(url=myurl, auth=oauth)
-        #print json.dumps(input, sort_keys = False, indent = 4)
-        #print json.dumps(r,sort_keys = False, indent = 4)
         newdata = json.loads(r.text)
         if test:
                 print json.dumps(newdata, sort_keys=True, indent=4)
                 print "------------------"
-                #print newdata
         count=0
         print len(newdata)
         if method == "timeline":
                 for row in newdata[0]:
                         print (newdata[count]['text'].encode('utf8'))
                         fh.write(newdata[count]['text'].encode('utf8'))
-                        #fh.write(str(newdata[count]['text'].encode('utf8')))
-                        #fh.write(str(newdata[count]['text'].encode('utf8')))
-                        #fh.write("\n")
                         count=count+1
         elif method == "searcht":
                 for k in newdata['statuses']:
@@ -100,8 +90,6 @@ def main():
                         if  k['user']['entities']:
                                 if  k['user']['entities'].get('url'):
                                         print k['user']['entities']['url']['urls'][0]['expanded_url']
-                        #print k['user']['entities']['url']['urls'][0]['expanded_url']
-                        #print (newdata['statuses'][count]['text'].encode('utf8'))
                         fh.write("\n")
         count=count+1
 
